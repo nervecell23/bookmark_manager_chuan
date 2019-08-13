@@ -1,5 +1,19 @@
 # Database setup
 
+### User Stories
+
+```
+As a User
+So that I can go to my bookmarked websites
+I would like to see a list of bookmarks with urls
+```
+
+```
+As a User
+So that I can have my website urls saved
+I would like to be able to add urls to my bookmarks
+```
+
 1. Connect to psql
 2. Create the database using the psql command CREATE DATABASE bookmark_manager;
 3. Connect to the database using the pqsl command \c bookmark_manager;

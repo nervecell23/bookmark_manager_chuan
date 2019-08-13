@@ -1,4 +1,5 @@
 #
+require 'bookmark'
 describe Bookmark do
   let(:pg_double){double("PG")}
   let(:connection_double){double("connection")}
