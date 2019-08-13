@@ -2,7 +2,10 @@ require 'pg'
 
 class Bookmark
 
+  def initialize
+    @bookmark = bookmark
 
+  end
 
   def self.all(bridge=PG)
     db = ENV['database']
@@ -11,4 +14,7 @@ class Bookmark
     result = conn.exec("SELECT * FROM bookmarks;")
     result.map{|bookmark| bookmark['url']}
   end
+
+
+
 end

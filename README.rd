@@ -10,8 +10,8 @@ I would like to see a list of bookmarks with urls
 
 ```
 As a User
-So that I can have my website urls saved
-I would like to be able to add urls to my bookmarks
+So that I can have my urls in a bookmark
+I would like to be able to add a new bookmark
 ```
 
 1. Connect to psql
