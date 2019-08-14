@@ -2,13 +2,14 @@
 <div>
   <ul>
     <%@bookmarks.each do |element|%>
-      <li><%=element%></li>
+      <li><a href= "<%=element.url%>"  ><%=element.title%></a></li>
     <%end%>
     </ul>
 </div>
 
 
 <form action="/bookmarks/new" method="post">
+    <input type="text" name="title">
     <input type="text" name="url">
     <input type="submit" value="Add">
 </form>

@@ -10,7 +10,8 @@ class BookmarkManager < Sinatra::Base
 
   post '/bookmarks/new' do
     new_url = params[:url]
-    Bookmark.create(new_url)
+    new_title = params[:title]
+    Bookmark.create(new_title, new_url)
     # use pg to add entries to database
     redirect '/bookmarks'
   end

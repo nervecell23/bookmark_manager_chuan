@@ -1,9 +1,12 @@
 require 'pg'
 
 class Bookmark
+  attr_reader :id, :title, :url
 
-  def initialize
-    @bookmark = bookmark
+  def initialize(id, title, url)
+    @id = id
+    @title = title
+    @url = url
 
   end
 
@@ -11,13 +14,15 @@ class Bookmark
     db = ENV['database']
     conn = bridge.connect(dbname: db)
     result = conn.exec("SELECT * FROM bookmarks;")
-    result.map{|bookmark| bookmark['url']}
+    result.map{|bookmark| Bookmark.new(bookmark['id'], bookmark['title'], bookmark['url'])}
   end
 
-  def self.create(bridge=PG, url)
+  def self.create(bridge=PG, title, url)
     db = ENV['database']
     conn = bridge.connect(dbname: db)
-    sql = "INSERT INTO bookmarks (url) VALUES('" + url + "');"
+
+    sql = "INSERT INTO bookmarks (title, url) VALUES('#{title}','#{url}');"
+
     result = conn.exec(sql)
   end
 
