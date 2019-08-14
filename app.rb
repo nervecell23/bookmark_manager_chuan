@@ -3,19 +3,16 @@ require_relative './lib/bookmark'
 
 class BookmarkManager < Sinatra::Base
 
-  get '/' do
+  get '/bookmarks' do
     @bookmarks = Bookmark.all
     erb(:'bookmarks/index')
   end
 
-  get '/bookmarks' do
-
-  end
-
-
-  post '/add_url' do
+  post '/bookmarks/new' do
+    new_url = params[:url]
+    Bookmark.create(new_url)
     # use pg to add entries to database
-    redirect '/'
+    redirect '/bookmarks'
   end
 
 

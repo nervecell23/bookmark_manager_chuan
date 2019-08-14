@@ -1,10 +1,14 @@
-<ul>
-  <%@bookmarks.each do |element|%>
-    <li><%=element%></li>
-  <%end%>
-</ul>
+<h2>This is some test</h2>
+<div>
+  <ul>
+    <%@bookmarks.each do |element|%>
+      <li><%=element%></li>
+    <%end%>
+    </ul>
+</div>
 
-<form action="/add_url" method="post">
+
+<form action="/bookmarks/new" method="post">
     <input type="text" name="url">
     <input type="submit" value="Add">
 </form>
