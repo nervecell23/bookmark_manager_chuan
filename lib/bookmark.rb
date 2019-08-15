@@ -1,5 +1,3 @@
-require 'pg'
-
 class Bookmark
   attr_reader :id, :title, :url
 
@@ -10,41 +8,44 @@ class Bookmark
 
   end
 
-  def self.all(bridge=PG)
-    db = ENV['database']
-    conn = bridge.connect(dbname: db)
-    result = conn.exec("SELECT * FROM bookmarks;")
+  def self.all
+    # db = ENV['database']
+    # conn = bridge.connect(dbname: db)
+    # result = conn.exec("SELECT * FROM bookmarks;")
+    result = DatabaseConnection.query("SELECT * FROM bookmarks;")
     result.map{|bookmark| Bookmark.new(bookmark['id'], bookmark['title'], bookmark['url'])}
   end
 
-  def self.create(bridge=PG, title, url)
-    db = ENV['database']
-    conn = bridge.connect(dbname: db)
-
+  def self.create(title, url)
+    # db = ENV['database']
+    # conn = bridge.connect(dbname: db)
     sql = "INSERT INTO bookmarks (title, url) VALUES('#{title}','#{url}');"
-
-    result = conn.exec(sql)
+    # result = conn.exec(sql)
+    result = DatabaseConnection.query(sql)
   end
 
   def self.delete(bridge=PG, id)
-    db = ENV['database']
-    conn = bridge.connect(dbname: db)
+    # db = ENV['database']
+    # conn = bridge.connect(dbname: db)
     sql = "DELETE FROM bookmarks WHERE id=#{id};"
-    result = conn.exec(sql)
+    # result = conn.exec(sql)
+    result = DatabaseConnection.query(sql)
   end
 
   def self.update(bridge=PG, id, modified_title, modified_url)
-    db = ENV['database']
-    conn = bridge.connect(dbname: db)
+    # db = ENV['database']
+    # conn = bridge.connect(dbname: db)
     sql = "UPDATE bookmarks SET title='#{modified_title}', url='#{modified_url}' WHERE id=#{id};"
-    result = conn.exec(sql)
+    # result = conn.exec(sql)
+    result = DatabaseConnection.query(sql)
   end
 
   def self.find(bridge=PG, id)
-    db = ENV['database']
-    conn = bridge.connect(dbname: db)
+    # db = ENV['database']
+    # conn = bridge.connect(dbname: db)
     sql = "SELECT * FROM bookmarks WHERE id=#{id};"
-    result = conn.exec(sql)
+    result = DatabaseConnection.query(sql)
+    # result = conn.exec(sql)
     result.map{|bookmark| Bookmark.new(bookmark['id'], bookmark['title'], bookmark['url'])}
   end
 
