@@ -26,6 +26,28 @@ class Bookmark
     result = conn.exec(sql)
   end
 
+  def self.delete(bridge=PG, id)
+    db = ENV['database']
+    conn = bridge.connect(dbname: db)
+    sql = "DELETE FROM bookmarks WHERE id=#{id};"
+    result = conn.exec(sql)
+  end
+
+  def self.update(bridge=PG, id, modified_title, modified_url)
+    db = ENV['database']
+    conn = bridge.connect(dbname: db)
+    sql = "UPDATE bookmarks SET title='#{modified_title}', url='#{modified_url}' WHERE id=#{id};"
+    result = conn.exec(sql)
+  end
+
+  def self.find(bridge=PG, id)
+    db = ENV['database']
+    conn = bridge.connect(dbname: db)
+    sql = "SELECT * FROM bookmarks WHERE id=#{id};"
+    result = conn.exec(sql)
+    result.map{|bookmark| Bookmark.new(bookmark['id'], bookmark['title'], bookmark['url'])}
+  end
+
 
 
 
