@@ -19,9 +19,13 @@ class Bookmark
   def self.create(title, url)
     # db = ENV['database']
     # conn = bridge.connect(dbname: db)
-    sql = "INSERT INTO bookmarks (title, url) VALUES('#{title}','#{url}');"
-    # result = conn.exec(sql)
-    result = DatabaseConnection.query(sql)
+    if url =~ /\A#{URI::regexp(['http', 'https'])}\z/
+      sql = "INSERT INTO bookmarks (title, url) VALUES('#{title}','#{url}');"
+      # result = conn.exec(sql)
+      result = DatabaseConnection.query(sql)
+    else
+      false
+    end 
   end
 
   def self.delete(bridge=PG, id)

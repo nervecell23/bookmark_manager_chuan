@@ -22,6 +22,15 @@ describe Bookmark do
     expect(random_bookmark).to respond_to(:url)
   end
 
+  describe '#create' do
+    it '- validate the input URL' do
+      expect(Bookmark.create('new_title', 'new_url')).to eq(false)
+      expect(Bookmark.create('new_title2', 'http://www.a.com')).not_to eq(false)
+    end
+  end
+
+
+
   # describe '#all' do
   #   it "- connect the psql and return a list of bookmarks" do
   #     target = ['http://www.makersacademy.com', 'http://www.google.com', 'http://www.twitter.com']
