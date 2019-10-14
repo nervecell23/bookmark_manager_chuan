@@ -1,25 +1,45 @@
-# Database setup
+Bookmark manager is a web application for managing URLs.
 
-### User Stories
+## Approach
+
+The web application is based on Sinatra framework and Postgresql database.
+
+## User stories implemented
+
+User can have an account
+User can CRUD a bookmark
+User can leave comment under a bookmark
+
+## Installation & Test
+
+1. Download repo, go to project directory and run:
+
+```bash
+> bundle install
+```
+
+2. Create database:
+
+```bash
+> ./migrate_database.sh
+```
+
+For Rspec test, run:
+
+```bash
+> rspec
+```
+
+## Usage
+
+To host the server on local machine. Fire up the server by running:
+
+```bash
+> ruby app.rb
+```
+
+Visit the web application at:
 
 ```
-As a User
-So that I can go to my bookmarked websites
-I would like to see a list of bookmarks with urls
+localhost:3000
 ```
-
-```
-As a User
-So that I can have my urls in a bookmark
-I would like to be able to add a new bookmark
-```
-
-1. Connect to psql
-2. Create the database using the psql command CREATE DATABASE bookmark_manager;
-3. Connect to the database using the pqsl command \c bookmark_manager;
-4. Run the query we have saved in the file 01_create_bookmarks_table.sql
-5. Set up environment variable 'database' to 'bookmark_manager' for local running command:
-    ```
-    export database='bookmark_manager'
-    ```
-6. Set up environment variable 'database' to 'bookmark_manager_test' in spec_helper.rb
