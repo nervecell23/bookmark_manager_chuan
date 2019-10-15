@@ -18,7 +18,7 @@ User can leave comment under a bookmark
 > bundle install
 ```
 
-2. Create database:
+2. Create database: It is presumed that Postgresql has been installed and superuser "postgres" has been created by default. Please modify _migrate_database.sh_ accordingly if user othat than "postgres" is used.
 
 ```bash
 > ./migrate_database.sh
