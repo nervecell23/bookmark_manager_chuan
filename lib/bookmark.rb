@@ -1,3 +1,5 @@
+require_relative './comment.rb'
+
 class Bookmark
   attr_reader :id, :title, :url
 
@@ -25,14 +27,11 @@ class Bookmark
       result = DatabaseConnection.query(sql)
     else
       false
-    end 
+    end
   end
 
-  def self.delete(bridge=PG, id)
-    # db = ENV['database']
-    # conn = bridge.connect(dbname: db)
-    sql = "DELETE FROM bookmarks WHERE id=#{id};"
-    # result = conn.exec(sql)
+  def delete
+    sql = "DELETE FROM bookmarks WHERE id=#{@id}"
     result = DatabaseConnection.query(sql)
   end
 
@@ -52,9 +51,5 @@ class Bookmark
     # result = conn.exec(sql)
     result.map{|bookmark| Bookmark.new(bookmark['id'], bookmark['title'], bookmark['url'])}
   end
-
-
-
-
 
 end
