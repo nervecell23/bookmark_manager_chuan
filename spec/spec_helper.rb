@@ -6,6 +6,8 @@ require_relative './features/helper'
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
+require 'simplecov'
+require 'simplecov-console'
 
 
 Capybara.app = BookmarkManager
@@ -24,6 +26,16 @@ Capybara.app = BookmarkManager
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
+  SimpleCov::Formatter::Console,
+  # Want a nice code coverage website? Uncomment this next line!
+  SimpleCov::Formatter::HTMLFormatter
+])
+SimpleCov.start do
+  add_filter(/helpers/)
+  add_filter(/spec/)
+end
+
 RSpec.configure do |config|
   config.before(:each) do
     setup_test_database
