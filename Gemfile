@@ -10,5 +10,7 @@ gem 'capybara'
 gem 'pg'
 gem 'sinatra-flash'
 gem 'pry'
+gem 'simplecov'
+gem 'simplecov-console'
 
 # gem "rails"
