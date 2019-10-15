@@ -57,9 +57,10 @@ describe Bookmark do
 
   describe '#delete' do
     it '- delete an entry in the database' do
-      expect(pg_double).to receive(:connect).and_return(connection_double)
-      expect(connection_double).to receive(:exec).with("DELETE FROM bookmarks WHERE id=random_id;")
-      Bookmark.delete(pg_double, 'random_id')
+      Bookmark.create('test_title', 'http://www.test.com')
+      bookmark = Bookmark.all[0]
+      bookmark.delete
+      expect(Bookmark.all[0]).to eq(nil)
     end
   end
 
