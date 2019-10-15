@@ -31,10 +31,7 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   # Want a nice code coverage website? Uncomment this next line!
   SimpleCov::Formatter::HTMLFormatter
 ])
-SimpleCov.start do
-  add_filter(/helpers/)
-  add_filter(/spec/)
-end
+SimpleCov.start
 
 RSpec.configure do |config|
   config.before(:each) do
