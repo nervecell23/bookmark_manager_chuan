@@ -6,8 +6,8 @@ The web application is based on Sinatra framework and Postgresql database.
 
 ## User stories implemented
 
-User can have an account
-User can CRUD a bookmark
+User can have an account  
+User can CRUD a bookmark  
 User can leave comment under a bookmark
 
 ## Installation & Test
