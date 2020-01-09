@@ -24,7 +24,7 @@ class BookmarkManager < Sinatra::Base
 
   post '/bookmarks/delete/:id' do
     id = params[:id]
-    Bookmark.delete(id)
+    Bookmark.find(id)[0].delete
     redirect '/bookmarks'
   end
 
@@ -40,6 +40,19 @@ class BookmarkManager < Sinatra::Base
     redirect '/bookmarks'
   end
 
+  # comment
+  get '/bookmarks/:id/comment' do
+    id = params[:id]
+    @searched_bookmark = Bookmark.find(id)
+    erb(:'bookmarks/add_comment')
+  end
+
+  post '/bookmarks/addcomment/:id' do
+    bookmark_id = params[:id]
+    text = params[:comment]
+    Comment.create(text, bookmark_id)
+    redirect '/bookmarks'
+  end
 
 
 
