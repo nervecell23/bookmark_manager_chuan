@@ -1,0 +1,9 @@
+<h2> Please add comment for <%=@searched_bookmark[0].title%></h2>
+
+<div>
+  <form action="/bookmarks/addcomment/<%=@searched_bookmark[0].id%>" id="usrform" method="post">
+    <input type="submit" value="Submit comment">
+  </form><br>
+  <textarea rows="4" cols="50" name="comment" form="usrform">
+  </textarea>
+</div>
