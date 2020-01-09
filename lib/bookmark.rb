@@ -52,4 +52,13 @@ class Bookmark
     result.map{|bookmark| Bookmark.new(bookmark['id'], bookmark['title'], bookmark['url'])}
   end
 
+  def show_comments
+    sql = "SELECT * FROM comments WHERE bookmark_id=#{@id};"
+    result = DatabaseConnection.query(sql)
+    result.map{|element|
+      Comment.new(element['id'], element['text'], element['bookmark_id'])
+      #will return an array of Comment obj
+    }
+  end
+
 end

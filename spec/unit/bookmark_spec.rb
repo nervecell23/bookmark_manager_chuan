@@ -1,7 +1,5 @@
 require 'bookmark'
 describe Bookmark do
-  let(:pg_double){double("PG")}
-  let(:connection_double){double("connection")}
 
   before(:each) do
     rslt = [
@@ -9,9 +7,6 @@ describe Bookmark do
       {'url' => 'http://www.google.com'},
       {'url' => 'http://www.twitter.com'}
     ]
-
-    allow(pg_double).to receive(:connect).and_return(connection_double)
-    allow(connection_double).to receive(:exec).and_return(rslt)
   end
 
   it "has attribute id, title and url" do
@@ -66,17 +61,18 @@ describe Bookmark do
 
   describe '#update' do
     it 'update an entry in db by its id' do
-      expect(pg_double).to receive(:connect).and_return(connection_double)
-      expect(connection_double).to receive(:exec).with("UPDATE bookmarks SET title='modified_title', url='modified_url' WHERE id=1;")
-      Bookmark.update(pg_double, 1, 'modified_title', 'modified_url')
+      Bookmark.create('test_title', 'http://www.test.com')
+      Bookmark.update(1, 'modified_title', 'http://www.test_modified.com')
+      expect(Bookmark.all[0].title).to eq('modified_title')
+      expect(Bookmark.all[0].url).to eq('http://www.test_modified.com')
     end
   end
 
   describe '#find' do
     it 'fetch an entry from db' do
-      expect(pg_double).to receive(:connect).and_return(connection_double)
-      expect(connection_double).to receive(:exec).with("SELECT * FROM bookmarks WHERE id=1;")
-      Bookmark.find(pg_double, 1)
+      Bookmark.create('test_title1', 'http://www.test1.com')
+      Bookmark.create('test_title2', 'http://www.test2.com')
+      expect(Bookmark.find(2)[0].title).to eq('test_title2')
     end
   end
 
